@@ -1,0 +1,89 @@
+{
+  "extensionName": {
+    "message": "Reading & Citation Assistant",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "An AI-powered assistant to generate instant summaries and academic citations.",
+    "description": "Description of the extension"
+  },
+  "tabSummary": {
+    "message": "Summary",
+    "description": "Summary tab"
+  },
+  "tabCitations": {
+    "message": "Citations",
+    "description": "Citations tab"
+  },
+  "helperSummary": {
+    "message": "Select text on the page or paste it here to summarize.",
+    "description": "Helper text in summary panel"
+  },
+  "placeholderSummary": {
+    "message": "Type or paste text to summarize...",
+    "description": "Placeholder for summary textarea"
+  },
+  "btnGenerateSummary": {
+    "message": "Generate Summary",
+    "description": "Button to generate summary"
+  },
+  "labelFormat": {
+    "message": "Format:",
+    "description": "Label for format selection"
+  },
+  "guideLinkText": {
+    "message": "View format guide ↗",
+    "description": "Link to format guide"
+  },
+  "labelType": {
+    "message": "Type:",
+    "description": "Label for citation type selection"
+  },
+  "optionReference": {
+    "message": "Bibliographic Reference (Full)",
+    "description": "Option for full bibliographic reference"
+  },
+  "optionInText": {
+    "message": "In-text Citation (Short)",
+    "description": "Option for short in-text citation"
+  },
+  "helperCitationAuto": {
+    "message": "Will be generated automatically using this tab's URL and title.",
+    "description": "Helper text when reference is automatic"
+  },
+  "helperCitationManual": {
+    "message": "Select or paste the exact fragment to cite...",
+    "description": "Helper text when it's an in-text citation"
+  },
+  "placeholderApa": {
+    "message": "Select or paste the exact fragment to cite...",
+    "description": "Placeholder for citation textarea"
+  },
+  "btnGenerateResult": {
+    "message": "Generate Result",
+    "description": "Main button to generate citations result"
+  },
+  "loaderText": {
+    "message": "Processing with AI...",
+    "description": "Loading indicator text"
+  },
+  "resultLabel": {
+    "message": "Result:",
+    "description": "Result container label"
+  },
+  "verifyNote": {
+    "message": "⚠️ Verify data before use.",
+    "description": "Warning note to verify data"
+  },
+  "copyBtn": {
+    "message": "Copy to Clipboard",
+    "description": "Button to copy the result"
+  },
+  
+  "cafeTexto": {
+    "message": "Found this helpful?"
+  },
+  "cafeLink": {
+    "message": "☕ Buy me a coffee"
+  }
+}

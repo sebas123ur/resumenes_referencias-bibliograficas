@@ -1,0 +1,88 @@
+{
+  "extensionName": {
+    "message": "Asistente de Lectura y Citas",
+    "description": "Nombre de la extensión"
+  },
+  "extensionDescription": {
+    "message": "Un asistente impulsado por IA para generar resúmenes instantáneos y citas académicas.",
+    "description": "Descripción de la extensión"
+  },
+  "tabSummary": {
+    "message": "Resumen",
+    "description": "Pestaña de resumen"
+  },
+  "tabCitations": {
+    "message": "Citas",
+    "description": "Pestaña de citas"
+  },
+  "helperSummary": {
+    "message": "Selecciona texto en la página o pégalo aquí para resumir.",
+    "description": "Texto de ayuda en el panel de resumen"
+  },
+  "placeholderSummary": {
+    "message": "Escribe o pega texto para resumir...",
+    "description": "Placeholder del textarea de resumen"
+  },
+  "btnGenerateSummary": {
+    "message": "Generar Resumen",
+    "description": "Botón para generar resumen"
+  },
+  "labelFormat": {
+    "message": "Formato:",
+    "description": "Etiqueta para seleccionar el formato"
+  },
+  "guideLinkText": {
+    "message": "Ver guía del formato ↗",
+    "description": "Enlace a la guía de formato"
+  },
+  "labelType": {
+    "message": "Tipo:",
+    "description": "Etiqueta para seleccionar el tipo de cita"
+  },
+  "optionReference": {
+    "message": "Referencia Bibliográfica (Completa)",
+    "description": "Opción de referencia bibliográfica"
+  },
+  "optionInText": {
+    "message": "Cita en el texto (Corta)",
+    "description": "Opción de cita en el texto"
+  },
+  "helperCitationAuto": {
+    "message": "Se generará automáticamente usando la URL y el título de esta pestaña.",
+    "description": "Texto de ayuda cuando es referencia automática"
+  },
+  "helperCitationManual": {
+    "message": "Selecciona o pega el fragmento exacto a citar...",
+    "description": "Texto de ayuda cuando es cita en el texto"
+  },
+  "placeholderApa": {
+    "message": "Selecciona o pega el fragmento exacto a citar...",
+    "description": "Placeholder del textarea de citas"
+  },
+  "btnGenerateResult": {
+    "message": "Generar Resultado",
+    "description": "Botón principal para generar resultado de citas"
+  },
+  "loaderText": {
+    "message": "Procesando con IA...",
+    "description": "Texto del indicador de carga"
+  },
+  "resultLabel": {
+    "message": "Resultado:",
+    "description": "Etiqueta del contenedor de resultados"
+  },
+  "verifyNote": {
+    "message": "⚠️ Verifica los datos antes de usar.",
+    "description": "Nota de advertencia para verificar datos"
+  },
+  "copyBtn": {
+    "message": "Copiar al Portapapeles",
+    "description": "Botón para copiar el resultado"
+  },
+  "cafeTexto": {
+    "message": "¿Te ha sido útil?"
+  },
+  "cafeLink": {
+    "message": "☕ Invítame un café"
+  }
+}

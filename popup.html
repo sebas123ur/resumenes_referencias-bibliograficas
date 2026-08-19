@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 320px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 12px;
+            background-color: #f9f9f9;
+        }
+        h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+        /* Tab Container */
+        .tabs {
+            display: flex;
+            background: #e0e0e0;
+            border-radius: 6px;
+            padding: 3px;
+            margin-bottom: 12px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 6px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            color: #666;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn.active {
+            background: #fff;
+            color: #0066cc;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        /* Content Panels */
+        .panel {
+            display: none;
+        }
+        .panel.active {
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            height: 75px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            font-size: 12px;
+            margin-bottom: 8px;
+            background: #fff;
+        }
+        .control-group {
+            margin-bottom: 8px;
+        }
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #555;
+        }
+        select {
+            width: 100%;
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background: #fff;
+            margin-bottom: 4px;
+        }
+        /* Estilo para el enlace de guía */
+        .guide-link-container {
+            text-align: right;
+            margin-bottom: 8px;
+        }
+        .guide-link-container a {
+            font-size: 11px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .guide-link-container a:hover {
+            text-decoration: underline;
+        }
+        .action-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .action-btn:hover {
+            background-color: #0055b3;
+        }
+        /* Helper texts */
+        .helper-text {
+            font-size: 11px;
+            color: #666;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+        /* Loader and Results */
+        .loader {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            display: none;
+        }
+        .result-wrapper {
+            margin-top: 12px;
+            display: none;
+        }
+        .result-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        .result-container {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 12px;
+            max-height: 80px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            outline: none;
+            margin-bottom: 6px;
+        }
+        .result-container:focus {
+            border-color: #0066cc;
+            background-color: #fffef9;
+        }
+        .verify-note {
+            font-size: 10px;
+            color: #666;
+            font-style: italic;
+            margin: 0 0 6px 0;
+            text-align: center;
+            display: block;
+        }
+        .copy-btn {
+            width: 100%;
+            margin-top: 2px;
+            margin-bottom: 8px;
+            padding: 6px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        .header-title h3 {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--primary);
+                margin-bottom: 2px;
+            }
+
+        /* Footer Support */
+            .footer-support {
+                text-align: center;
+                padding-top: 4px;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .footer-support a {
+                font-size: 11px;
+                text-decoration: none;
+                color: var(--text-muted);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                transition: opacity 0.2s;
+            }
+
+            .footer-support a:hover {
+                opacity: 0.8;
+            }
+    </style>
+</head>
+<body>
+
+    <h3>__MSG_extensionName__</h3>
+
+    <!-- Tab Buttons -->
+    <div class="tabs">
+        <button class="tab-btn" id="btnTabResumen">__MSG_tabSummary__</button>
+        <button class="tab-btn active" id="btnTabApa">__MSG_tabCitations__</button>
+    </div>
+
+    <!-- Summary Panel -->
+    <div id="panel-resumen" class="panel">
+        <p class="helper-text">__MSG_helperSummary__</p>
+        <textarea id="textoResumen" placeholder="__MSG_placeholderSummary__"></textarea>
+        <button class="action-btn" id="btnResumir">__MSG_btnGenerateSummary__</button>
+    </div>
+
+    <!-- Citations Panel -->
+    <div id="panel-apa" class="panel active">
+        <div class="control-group">
+            <label for="formatSelect">__MSG_labelFormat__</label>
+            <select id="formatSelect">
+                <option value="APA">APA (7th Edition)</option>
+                <option value="IEEE">IEEE</option>
+                <option value="Vancouver">Vancouver</option>
+                <option value="Harvard">Harvard</option>
+                <option value="MLA">MLA</option>
+            </select>
+            <!-- Enlace de ayuda dinámico integrado -->
+            <div class="guide-link-container">
+                <a id="guideLink" href="https://biblioguias.uam.es/citar/estilo_apa_7th_ed" target="_blank">__MSG_guideLinkText__</a>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="citationType">__MSG_labelType__</label>
+            <select id="citationType">
+                <option value="reference">__MSG_optionReference__</option>
+                <option value="in-text">__MSG_optionInText__</option>
+            </select>
+        </div>
+
+        <!-- Dynamic helper text -->
+        <p id="helper-citation" class="helper-text">__MSG_helperCitationAuto__</p>
+
+        <!-- Textarea visible only for In-text citations -->
+        <div id="container-textarea" style="display: none;">
+            <textarea id="textoApa" placeholder="__MSG_placeholderApa__"></textarea>
+        </div>
+
+        <button class="action-btn" id="btnApa">__MSG_btnGenerateResult__</button>
+
+       <!-- FOOTER -->
+        <div class="footer-support">
+            <a href="https://ko-fi.com/sebasurl123" target="_blank" id="cafeTexto">
+                <span>__MSG_cafeTexto__</span>
+                <span style="color: #0066cc; font-weight: 600;">__MSG_cafeLink__</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loader" class="loader">__MSG_loaderText__</div>
+
+    <!-- Result Container Único -->
+    <div id="result-wrapper" class="result-wrapper">
+        <div id="result-label" class="result-label">__MSG_resultLabel__</div>
+        <div id="result-container" class="result-container" contenteditable="true"></div>
+        <span class="verify-note">__MSG_verifyNote__</span>
+        <button class="copy-btn" id="btnCopiar">__MSG_copyBtn__</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
