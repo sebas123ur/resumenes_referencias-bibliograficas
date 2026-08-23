@@ -172,33 +172,33 @@
             background-color: #218838;
         }
         .header-title h3 {
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--primary);
-                margin-bottom: 2px;
-            }
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
 
         /* Footer Support */
-            .footer-support {
-                text-align: center;
-                padding-top: 4px;
-                border-top: 1px solid var(--border-color);
-            }
+        .footer-support {
+            text-align: center;
+            padding-top: 4px;
+            border-top: 1px solid var(--border-color);
+        }
 
-            .footer-support a {
-                font-size: 11px;
-                text-decoration: none;
-                color: var(--text-muted);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 4px;
-                transition: opacity 0.2s;
-            }
+        .footer-support a {
+            font-size: 11px;
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: opacity 0.2s;
+        }
 
-            .footer-support a:hover {
-                opacity: 0.8;
-            }
+        .footer-support a:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -208,7 +208,7 @@
     <!-- Tab Buttons -->
     <div class="tabs">
         <button class="tab-btn" id="btnTabResumen">__MSG_tabSummary__</button>
-        <button class="tab-btn active" id="btnTabApa">__MSG_tabCitations__</button>
+        <button class="tab-btn active" id="btnTabApa">Referencias</button>
     </div>
 
     <!-- Summary Panel -->
@@ -216,6 +216,13 @@
         <p class="helper-text">__MSG_helperSummary__</p>
         <textarea id="textoResumen" placeholder="__MSG_placeholderSummary__"></textarea>
         <button class="action-btn" id="btnResumir">__MSG_btnGenerateSummary__</button>
+        <!-- FOOTER -->
+        <div class="footer-support">
+            <a href="https://ko-fi.com/sebasurl123" target="_blank" id="cafeTexto">
+                <span>__MSG_cafeTexto__</span>
+                <span style="color: #0066cc; font-weight: 600;">__MSG_cafeLink__</span>
+            </a>
+        </div>
     </div>
 
     <!-- Citations Panel -->
@@ -235,23 +242,10 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <label for="citationType">__MSG_labelType__</label>
-            <select id="citationType">
-                <option value="reference">__MSG_optionReference__</option>
-                <option value="in-text">__MSG_optionInText__</option>
-            </select>
-        </div>
-
         <!-- Dynamic helper text -->
-        <p id="helper-citation" class="helper-text">__MSG_helperCitationAuto__</p>
+        <p id="helper-citation" class="helper-text">Se generará automáticamente usando la URL y el título de esta pestaña.</p>
 
-        <!-- Textarea visible only for In-text citations -->
-        <div id="container-textarea" style="display: none;">
-            <textarea id="textoApa" placeholder="__MSG_placeholderApa__"></textarea>
-        </div>
-
-        <button class="action-btn" id="btnApa">__MSG_btnGenerateResult__</button>
+        <button class="action-btn" id="btnApa">Generar Resultado</button>
 
        <!-- FOOTER -->
         <div class="footer-support">
@@ -274,6 +268,7 @@
         <button class="copy-btn" id="btnCopiar">__MSG_copyBtn__</button>
     </div>
 
+    <script src="config.js"></script>
     <script src="popup.js"></script>
 </body>
 </html>

@@ -43,22 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         limpiarResultados();
     });
 
-    // --- 2. MOSTRAR/OCULTAR CAMPO DE CITA SEGÚN TIPO Y LIMPIAR RESULTADOS ---
-    document.getElementById('citationType').addEventListener('change', () => {
-        const citationType = document.getElementById('citationType').value;
-        const containerTextarea = document.getElementById('container-textarea');
-        const helperText = document.getElementById('helper-citation');
-
-        if (citationType === 'reference') {
-            containerTextarea.style.display = 'none';
-            helperText.textContent = "Will be generated automatically using this tab's URL and title.";
-        } else {
-            containerTextarea.style.display = 'block';
-            helperText.textContent = "Select or paste the exact fragment to cite...";
-        }
-        limpiarResultados();
-    });
-
     // --- CAMBIO DINÁMICO DEL ENLACE DE AYUDA Y FORMATO ---
     const guideLinks = {
         "APA": "https://biblioguias.uam.es/citar/estilo_apa_7th_ed",
@@ -121,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/api/text_summary', {
+            const response = await fetch(CONFIG.API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -156,13 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 4. BOTÓN DE CITAS Y REFERENCIAS ---
+    // --- 4. BOTÓN DE REFERENCIAS AUTOMÁTICAS ---
     document.getElementById('btnApa').addEventListener('click', async () => {
         const formato = document.getElementById('formatSelect').value;
-        const tipo = document.getElementById('citationType').value;
-        let textoCita = document.getElementById('textoApa').value.trim();
 
-        mostrarCarga(true, "Generando referencia o cita...");
+        mostrarCarga(true, "Generando referencia bibliográfica...");
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 15000);
@@ -173,27 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!tab || !tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('edge://')) {
                 clearTimeout(timeoutId);
                 mostrarCarga(false);
-                alert('No se puede extraer texto de páginas internas del navegador.');
+                alert('No se puede extraer información de páginas internas del navegador.');
                 return;
-            }
-
-            if (tipo === 'in-text' && !textoCita) {
-                const injectionResults = await chrome.scripting.executeScript({
-                    target: { tabId: tab.id },
-                    func: () => window.getSelection ? window.getSelection().toString().trim() : ''
-                });
-
-                const selectedText = injectionResults && injectionResults[0] ? injectionResults[0].result : '';
-
-                if (selectedText && selectedText.length > 0) {
-                    textoCita = selectedText;
-                    document.getElementById('textoApa').value = selectedText;
-                } else {
-                    clearTimeout(timeoutId);
-                    mostrarCarga(false);
-                    alert("Por favor selecciona texto en la página o escribe el fragmento para la cita.");
-                    return;
-                }
             }
 
             const metaInjection = await chrome.scripting.executeScript({
@@ -204,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                        document.querySelector('meta[name="byl"]')?.content || '';
                     
                     const dateMeta = document.querySelector('meta[property="article:published_time"]')?.content || 
-                                   document.querySelector('time')?.getAttribute('datetime') || '';
+                                     document.querySelector('time')?.getAttribute('datetime') || '';
 
                     const authorSelectors = [
                         '[data-testid="author"]', '.author-name', '.byline', 
@@ -239,19 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const metaRes = metaInjection && metaInjection[0] ? metaInjection[0].result : {};
             const autorDetectadoPagina = metaRes.author || '';
             const fechaDetectadaPagina = metaRes.date || '';
-            
-            let contextoAdicional = `Autor detectado en DOM: ${autorDetectadoPagina} | Fecha meta: ${fechaDetectadaPagina} | Contenido: ${metaRes.context}`;
 
-            const res = await fetch('http://localhost:3000/api/text_summary', {
+            const res = await fetch(CONFIG.API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    text: tipo === 'in-text' ? `Fragmento seleccionado a citar: "${textoCita}"\n\nContexto general de la página: ${contextoAdicional}` : `Contexto y metadatos de la página:\nAutor detectado: ${autorDetectadoPagina}\nFecha detectada: ${fechaDetectadaPagina}\nContenido: ${metaRes.context}`,
+                    text: `Contexto y metadatos de la página:\nAutor detectado: ${autorDetectadoPagina}\nFecha detectada: ${fechaDetectadaPagina}\nContenido: ${metaRes.context}`,
                     pageTitle: tab.title,
                     pageUrl: tab.url,
                     format: formato,
                     mode: 'citations',
-                    type: tipo,
+                    type: 'reference',
                     author: autorDetectadoPagina
                 }),
                 signal: controller.signal
@@ -264,12 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (res.ok && data.result) {
                 mostrarResultado(data.result, true, 'citations');
             } else {
-                mostrarResultado('Atención: ' + (data.error || "Error al generar la cita."), false, 'citations');
+                mostrarResultado('Atención: ' + (data.error || "Error al generar la referencia."), false, 'citations');
             }
         } catch (err) {
             clearTimeout(timeoutId);
             mostrarCarga(false);
-            console.error('Error en citas:', err);
+            console.error('Error en referencias:', err);
             if (err.name === 'AbortError') {
                 mostrarResultado("El servidor tardó demasiado en responder (Timeout). Intenta de nuevo.", false, 'citations');
             } else {
@@ -304,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isSuccess) {
             btnCopiar.style.display = 'block';
             if (verifyNote) verifyNote.style.display = 'block';
-            btnPrincipal.textContent = tipoBoton === 'summary' ? 'Generate Summary' : 'Generate Citation / Reference';
+            btnPrincipal.textContent = tipoBoton === 'summary' ? 'Generate Summary' : 'Generar Resultado';
             
             const textoHtmlFormat = texto.replace(/\*(.*?)\*/g, '<em>$1</em>');
             container.innerHTML = textoHtmlFormat;
