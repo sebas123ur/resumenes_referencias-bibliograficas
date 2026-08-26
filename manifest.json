@@ -6,13 +6,13 @@
     "default_locale": "es",
     "permissions": [
         "activeTab",
-        "scripting",
-        "storage"
+        "scripting"
     ],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/icon16.png",
+            "48":"images/icon48.png",
             "128": "images/icon128.png"
         }
     },

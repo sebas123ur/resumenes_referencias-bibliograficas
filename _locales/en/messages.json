@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Reading & Citation Assistant",
+    "message": "Summary & Reference Assistant",
     "description": "Name of the extension"
   },
   "extensionDescription": {
@@ -31,7 +31,7 @@
     "message": "Format:",
     "description": "Label for format selection"
   },
-  "guideLinkText": {
+  "guideLinkTest": {
     "message": "View format guide ↗",
     "description": "Link to format guide"
   },

@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Asistente de Lectura y Citas",
+    "message": "Asistente de Resúmenes y Referencias",
     "description": "Nombre de la extensión"
   },
   "extensionDescription": {
@@ -31,7 +31,7 @@
     "message": "Formato:",
     "description": "Etiqueta para seleccionar el formato"
   },
-  "guideLinkText": {
+  "guideLinkTest": {
     "message": "Ver guía del formato ↗",
     "description": "Enlace a la guía de formato"
   },

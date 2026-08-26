@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isSuccess) {
             btnCopiar.style.display = 'block';
             if (verifyNote) verifyNote.style.display = 'block';
-            btnPrincipal.textContent = tipoBoton === 'summary' ? 'Generate Summary' : 'Generar Resultado';
+            btnPrincipal.textContent = tipoBoton === 'summary' ? 'Generar resumen' : 'Generar Resultado';
             
             const textoHtmlFormat = texto.replace(/\*(.*?)\*/g, '<em>$1</em>');
             container.innerHTML = textoHtmlFormat;
