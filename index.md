@@ -22,3 +22,4 @@ We may update our Privacy Policy from time to time. We will notify you of any ch
 ## Contact Us
 If you have any questions about this Privacy Policy, you can contact us at:
 * Email: scumacosogamoso@gmail.com
+* github:[https://github.com/sebas123ur/extension_bloqueadora_anuncios]https://github.com/sebas123ur/extension_bloqueadora_anuncios
