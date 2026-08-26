@@ -21,5 +21,4 @@ We may update our Privacy Policy from time to time. We will notify you of any ch
 
 ## Contact Us
 If you have any questions about this Privacy Policy, you can contact us at:
-[scumacosogamoso@gmail.com]
 * Email: scumacosogamoso@gmail.com
